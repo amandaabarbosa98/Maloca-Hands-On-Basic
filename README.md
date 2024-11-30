@@ -1,11 +1,12 @@
-# Maloca-Hands-On-Basic (Botão de Pânico com Buzzer)
+# Maloca-Hands-On-Basic (Botão de Pânico)
 
-Este projeto utiliza o microcontrolador ESP32 para criar um sistema de alerta de emergência. O sistema, ao ser ativado por meio de um botão, envia mensagens de socorro via WhatsApp para números predefinidos, utilizando a API do CallMeBot. Além disso, um buzzer é acionado para alertar os usuários locais sobre a emergência, complementando os alertas enviados pelas mensagens.
+Este projeto usa o microcontrolador ESP32 para criar um sistema de alerta de emergência. Ao pressionar um botão, o sistema envia uma mensagem de socorro via WhatsApp para um número predefinido, utilizando a API do CallMeBot. O código também obtém a localização do dispositivo usando o IP e adiciona essa informação à mensagem. Um LED externo são usados para alertar os usuários locais.
+
 
 ## Funcionalidades
 
 - **Envio de mensagens de socorro via WhatsApp**: Quando o botão é pressionado, o sistema envia uma mensagem de alerta ("SOCORRO!!! ME AJUDE") para dois números de telefone cadastrados.
-- **Alerta sonoro**: Um buzzer é acionado sempre que o botão é pressionado, gerando um som para alertar os usuários locais.
+- **Informação de localização**: A localização do dispositivo é obtida com base no IP público e adicionada à mensagem enviada. O link para a localização é incluído na mensagem para facilitar o acompanhamento.
 - **Indicação de status de conexão Wi-Fi**: O sistema pisca um LED interno para indicar que está tentando se conectar à rede Wi-Fi e acende quando a conexão é bem-sucedida.
 - **Indicação do envio de mensagem**: Um LED externo acende quando a mensagem está sendo enviada, proporcionando feedback visual.
 
@@ -14,7 +15,6 @@ Este projeto utiliza o microcontrolador ESP32 para criar um sistema de alerta de
 - Botão
 - LED externo
 - LED interno (do próprio ESP32)
-- Buzzer
 - Resistores (para o botão e LEDs)
 - Fios de conexão e protoboard
 
@@ -41,8 +41,10 @@ git clone https://github.com/amandaabarbosa98/Maloca-Hands-On-Basic.git
 6. Carregue o código no seu ESP32.
 
 ## Estrutura do Código
-- **Função setup():** Configura os pinos, inicializa a comunicação serial, conecta-se ao Wi-Fi e indica o status da conexão com LEDs.
-- **Função loop():** Monitora o botão e, ao ser pressionado, aciona o envio da mensagem de socorro e o alerta sonoro com o buzzer.
+- **Função conectarWifi()** Conecta o ESP32 à rede Wi-Fi e indica o status com o LED interno.
+- **Função obterLocalizacaoIP():** Obtém a localização do dispositivo usando o endereço IP público.
+- **Função enviarMensagem():** Envia a mensagem de socorro via API do CallMeBot.
+- **Função urlencode():** Codifica a mensagem em formato URL para envio via GET.
 
 ## Contribuições
 
